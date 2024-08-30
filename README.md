@@ -4,4 +4,4 @@
 * Moretti, Fransisco
 * Preneste, Maximo
 
-Se utiliza __ Jetback Compose __ y __ API 24 __
+Se utiliza __Jetback Compose__ y __API 24__
