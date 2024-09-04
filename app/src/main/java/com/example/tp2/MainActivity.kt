@@ -114,4 +114,3 @@ fun FilledButton(string: String, emoji: String, modifier: Modifier = Modifier, d
         }
     }
 }
-
