@@ -61,9 +61,9 @@ class MainActivity : ComponentActivity() {
                     )
                     Spacer(modifier = Modifier.height(30.dp))
                     FilledButton(
-                        string = "Adivina el Numero ",
+                        string = "Adivina el Numero",
                         emoji = "🎲",
-                        destinationActivity = Activity::class.java //actividad de adivina el numero
+                        destinationActivity = GuessNumber::class.java //actividad de adivina el numero
                     )
                 }
             }
