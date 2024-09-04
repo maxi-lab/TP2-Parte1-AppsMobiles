@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                     FilledButton(
                         string = "Un poco de geografía",
                         emoji = "\uD83C\uDFD9\uFE0F",
-                        destinationActivity = CapitalActivity::class.java //actividad de capitale
+                        destinationActivity = CapitalsActivity::class.java //actividad de capitale
                     )
                     Spacer(modifier = Modifier.height(30.dp))
                     FilledButton(
