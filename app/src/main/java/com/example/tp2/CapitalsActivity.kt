@@ -41,7 +41,7 @@ class CapitalsActivity : ComponentActivity() {
                 ) {
                     Spacer(modifier = Modifier.size(100.dp))
                     Title(
-                        "Capitales de Paises",
+                        "Capitales de Países",
                         Modifier
                             .fillMaxWidth()
                             .wrapContentSize(align = Alignment.TopCenter)
