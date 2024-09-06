@@ -4,7 +4,7 @@
 * Moretti, Fransisco.
 * Preneste, Maximo.
 
-## Usammos 
+## Usamos 
 * __Jetback Compose__.
 * __API 24__.
 
