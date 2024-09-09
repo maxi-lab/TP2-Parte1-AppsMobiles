@@ -26,12 +26,14 @@
         <activity android:name=".CapitalsActivity"
             android:exported="true"
             android:label="CapitalsActivity"
-            android:theme="@style/Theme.TP2">
+            android:theme="@style/Theme.TP2"
+            android:parentActivityName=".MainActivity">
         </activity>
         <activity android:name=".GuessNumber"
             android:exported="true"
             android:label="GuessNumber"
-            android:theme="@style/Theme.TP2">
+            android:theme="@style/Theme.TP2"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 
