@@ -1,31 +1,24 @@
 package com.example.tp2
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material3.Card
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.platform.LocalContext
 import com.example.tp2.ui.theme.TP2Theme
 
 class CapitalsActivity : ComponentActivity() {
@@ -34,22 +27,52 @@ class CapitalsActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TP2Theme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(20.dp)
-                ) {
-                    Spacer(modifier = Modifier.size(100.dp))
-                    Title(
-                        "Capitales de Países",
-                        Modifier
-                            .fillMaxWidth()
-                            .wrapContentSize(align = Alignment.TopCenter)
-                    )
-                    Spacer(modifier = Modifier.size(20.dp))
-                    MenuScreen()
-                }
+                CapitalsScreen()
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CapitalsScreen() {
+    val context = LocalContext.current
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Capitales de Países") },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        // Volver a MainActivity
+                        val intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
+                    }) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Volver atrás"
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(
+            contentPadding = innerPadding,
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            item { MenuCard("Cargar una ciudad capital", "Permite al usuario cargar una ciudad capital") { /* Acción */ } }
+            item { Spacer(modifier = Modifier.height(10.dp)) }
+            item { MenuCard("Consultar una ciudad por su nombre", "Permite al usuario buscar una ciudad por su nombre") { /* Acción */ } }
+            item { Spacer(modifier = Modifier.height(10.dp)) }
+            item { MenuCard("Borrar una ciudad ingresando su nombre", "Permite al usuario borrar una ciudad ingresando su nombre") { /* Acción */ } }
+            item { Spacer(modifier = Modifier.height(10.dp)) }
+            item { MenuCard("Borrar todas las ciudades", "Permite al usuario borrar todas las ciudades del listado") { /* Acción */ } }
+            item { Spacer(modifier = Modifier.height(10.dp)) }
+            item { MenuCard("Modificar la población de una ciudad", "Permite al usuario modificar la población de una ciudad") { /* Acción */ } }
         }
     }
 }
@@ -59,94 +82,19 @@ fun MenuCard(title: String, description: String, onButtonClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(3.dp)
-            .clickable { onButtonClick() },
+            .clickable { onButtonClick() }
+            .padding(4.dp)
     ) {
         Row(
-            modifier = Modifier
-                .padding(16.dp),
+            modifier = Modifier.padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(
-                    text = title,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(bottom = 4.dp)
-                )
-                Text(
-                    text = description,
-                    fontSize = 14.sp,
-                    modifier = Modifier.padding(bottom = 8.dp)
-                )
+            Column(modifier = Modifier.weight(1f)) {
+                Text(text = title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = description, fontSize = 14.sp)
             }
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                contentDescription = "Ir a la siguiente pantalla"
-            )
-        }
-    }
-}
-
-@Composable
-fun MenuScreen() {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        item {
-            MenuCard(
-                title = "Cargar una ciudad capital",
-                description = "Permite al usuario cargar una ciudad capital",
-                onButtonClick = {
-
-                }
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.size(10.dp))
-            MenuCard(
-                title = "Consultar una ciudad por su nombre",
-                description = "Permite al usuario buscar una ciudad por su nombre",
-                onButtonClick = {
-
-                }
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.size(10.dp))
-            MenuCard(
-                title = "Borrar una ciudad ingresando su nombre",
-                description = "Permite al usuario borrar una ciudad ingresando su nombre",
-                onButtonClick = {
-
-                }
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.size(10.dp))
-            MenuCard(
-                title = "Borrar todas las ciudades",
-                description = "Permite al usuario borrar todas las ciudades del listado",
-                onButtonClick = {
-
-                }
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.size(10.dp))
-            MenuCard(
-                title = "Modificar la población de una ciudad",
-                description = "Permite al usuario modificar la población de una ciudad",
-                onButtonClick = {
-
-                }
-            )
+            Icon(imageVector = Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Ir a la siguiente pantalla")
         }
     }
 }

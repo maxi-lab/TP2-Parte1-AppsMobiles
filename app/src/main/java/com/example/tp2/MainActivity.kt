@@ -2,21 +2,11 @@ package com.example.tp2
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -29,44 +19,55 @@ import androidx.compose.ui.unit.sp
 import com.example.tp2.ui.theme.TP2Theme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("MainActivity", "onCreate called")
         enableEdgeToEdge()
         setContent {
             TP2Theme {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(20.dp)
-                ) {
-                    Spacer(modifier = Modifier.size(100.dp))
-                    Title(
-                        "Trabajo Practico Nro 2",
-                        Modifier
-                            .fillMaxWidth()
-                            .wrapContentSize(align = Alignment.TopCenter)
-                    )
-                    Spacer(modifier = Modifier.size(200.dp))
-                    Subtitle(
-                        "¿A qué quiere ingresar?",
-                        Modifier
-                            .fillMaxWidth()
-                            .wrapContentSize(align = Alignment.Center)
-                    )
-                    Spacer(modifier = Modifier.size(100.dp))
-                    FilledButton(
-                        string = "Un poco de geografía",
-                        emoji = "\uD83C\uDFD9\uFE0F",
-                        destinationActivity = CapitalsActivity::class.java //actividad de capitale
-                    )
-                    Spacer(modifier = Modifier.height(30.dp))
-                    FilledButton(
-                        string = "Adivina el Numero",
-                        emoji = "🎲",
-                        destinationActivity = GuessNumber::class.java //actividad de adivina el numero
-                    )
-                }
+                MainScreen()
             }
+        }
+    }
+}
+
+@Composable
+fun MainScreen() {
+    val context = LocalContext.current
+
+    Scaffold { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding) // Utiliza innerPadding aquí
+        ) {
+            Spacer(modifier = Modifier.size(100.dp))
+            Title(
+                "Trabajo Practico Nro 2",
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(align = Alignment.TopCenter)
+            )
+            Spacer(modifier = Modifier.size(200.dp))
+            Subtitle(
+                "¿A qué quiere ingresar?",
+                Modifier
+                    .fillMaxWidth()
+                    .wrapContentSize(align = Alignment.Center)
+            )
+            Spacer(modifier = Modifier.size(100.dp))
+            FilledButton(
+                string = "Un poco de geografía",
+                emoji = "\uD83C\uDFD9\uFE0F",
+                onClick = { context.startActivity(Intent(context, CapitalsActivity::class.java)) }
+            )
+            Spacer(modifier = Modifier.height(30.dp))
+            FilledButton(
+                string = "Adivina el Numero",
+                emoji = "🎲",
+                onClick = { context.startActivity(Intent(context, GuessNumber::class.java)) }
+            )
         }
     }
 }
@@ -87,19 +88,15 @@ fun Subtitle(string: String, modifier: Modifier = Modifier) {
     Text(
         text = string,
         fontSize = 24.sp,
-
         modifier = modifier,
     )
 }
 
 @Composable
-fun FilledButton(string: String, emoji: String, modifier: Modifier = Modifier, destinationActivity: Class<*>) {
-    val context = LocalContext.current
+fun FilledButton(string: String, emoji: String, onClick: () -> Unit) {
     Button(
-        onClick = {
-            val intent = Intent(context, destinationActivity)
-            context.startActivity(intent) },
-        modifier = modifier
+        onClick = onClick,
+        modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp)
     ) {
