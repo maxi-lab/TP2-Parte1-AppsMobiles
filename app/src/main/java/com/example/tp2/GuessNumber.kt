@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,10 +13,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -30,34 +27,31 @@ class GuessNumber : ComponentActivity() {
         setContent {// dentro de estas llaves se pinta en la pantalla del telefono
             //se pueden llamar las funciones que tengan la etiqueta de composable
             //ViewModel - State
-            RandomNumberScreen()
+            val gameViewModel by viewModels<GameViewModel> ()
+            RandomNumberScreen(gameViewModel)
         }
     }
     @Composable
-    fun RandomNumberScreen(){
-        var score by remember {
-            mutableIntStateOf(0)
-        }
+    fun RandomNumberScreen(gameViewModel:GameViewModel){
+
         Column(
             Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            ScoreGame(score = score)
+            BestScore(bestScore = gameViewModel.gameState.bestScore)
+            AttemptsGame(attempts = gameViewModel.gameState.attempts)
+            ScoreGame(score =gameViewModel.gameState.score)
             for (i in 1..5) {
                 Number(i){
-                    score += 10
+                    gameViewModel.onClickNumber(i)
                 }
             }
         }
     }
     @Composable
     fun Number(number: Int, onClick:()->Unit) {
-        Button(onClick = {
-            if (number == Random.nextInt(1..5)) {
-                onClick()
-            }
-            }) {
+        Button(onClick = { onClick()}) {
             Text(text = number.toString())
         }
     }
@@ -67,6 +61,24 @@ class GuessNumber : ComponentActivity() {
             Text(text = score.toString(),
                 fontSize = 30.sp,
                 modifier = Modifier.padding(8.dp))
+        }
+    }
+    @Composable
+    fun AttemptsGame(attempts:Int){
+        Card {
+            Text(text = attempts.toString(),
+                fontSize = 30.sp,
+                modifier = Modifier.padding((8.dp))
+                )
+        }
+    }
+    @Composable
+    fun BestScore(bestScore:Int){
+        Card {
+            Text(text = bestScore.toString(),
+                fontSize = 30.sp,
+                modifier = Modifier.padding((8.dp))
+            )
         }
     }
 }
