@@ -1,4 +1,4 @@
-package com.example.tp2.Data
+package com.example.tp2.data
 
 data class Capital(
     val id: Long = -1,
