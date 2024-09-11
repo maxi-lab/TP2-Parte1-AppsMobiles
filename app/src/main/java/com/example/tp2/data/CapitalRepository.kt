@@ -53,4 +53,25 @@ class CapitalRepository(context: Context) {
         }
         return database.update("capitales", values, "_id = ?", arrayOf(capital.id.toString())) > 0
     }
+
+    fun getCapitalByName(nombreCapital: String): Capital? {
+        val cursor = database.query(
+            "capitales",
+            null,
+            "nombreCapital = ?",
+            arrayOf(nombreCapital.lowercase()),
+            null,
+            null,
+            null
+        )
+        cursor.use {
+            if (it.moveToNext()) {
+                val id = it.getLong(it.getColumnIndexOrThrow("_id"))
+                val nombrePais = it.getString(it.getColumnIndexOrThrow("nombrePais"))
+                val habitantesPromedio = it.getInt(it.getColumnIndexOrThrow("habitantesPromedio"))
+                return Capital(id, nombrePais, nombreCapital, habitantesPromedio)
+            }
+        }
+        return null
+    }
 }
