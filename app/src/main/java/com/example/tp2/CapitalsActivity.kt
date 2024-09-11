@@ -66,7 +66,10 @@ fun CapitalsScreen() {
         ) {
             item { MenuCard("Cargar una ciudad capital", "Permite al usuario cargar una ciudad capital") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item { MenuCard("Consultar una ciudad por su nombre", "Permite al usuario buscar una ciudad por su nombre") { /* Acción */ } }
+            item { MenuCard("Consultar una ciudad por su nombre", "Permite al usuario buscar una ciudad por su nombre") {
+                val intent = Intent(context, GetCapitalByNameActivity::class.java)
+                context.startActivity(intent)
+            } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
             item { MenuCard("Borrar una ciudad ingresando su nombre", "Permite al usuario borrar una ciudad ingresando su nombre") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
