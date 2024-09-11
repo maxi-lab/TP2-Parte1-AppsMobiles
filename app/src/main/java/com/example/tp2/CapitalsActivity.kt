@@ -19,6 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
+import com.example.tp2.data.CapitalRepository
 import com.example.tp2.ui.theme.TP2Theme
 
 class CapitalsActivity : ComponentActivity() {

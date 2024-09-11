@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tp2.data.Capital
+import com.example.tp2.data.CapitalRepository
 import com.example.tp2.ui.theme.TP2Theme
 
 class CreateCapitalActivity : ComponentActivity() {
