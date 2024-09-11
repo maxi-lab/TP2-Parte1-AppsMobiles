@@ -16,7 +16,8 @@
             android:name=".GetCapitalByNameActivity"
             android:exported="false"
             android:label="@string/title_activity_get_capital_by_name"
-            android:theme="@style/Theme.TP2" />
+            android:theme="@style/Theme.TP2"
+            android:parentActivityName=".CapitalsActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -33,13 +34,13 @@
             android:exported="true"
             android:label="CapitalsActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.TP2"></activity>
+            android:theme="@style/Theme.TP2"/>
         <activity
             android:name=".GuessNumber"
             android:exported="true"
             android:label="GuessNumber"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.TP2"></activity>
+            android:theme="@style/Theme.TP2"/>
     </application>
 
 </manifest>
