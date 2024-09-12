@@ -16,6 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import com.example.tp2.data.Capital
 import com.example.tp2.data.CapitalRepository
 import com.example.tp2.ui.theme.TP2Theme
@@ -37,6 +39,8 @@ class CreateCapitalActivity : ComponentActivity() {
     @Composable
     fun CreateCapitalScreen() {
         val context = LocalContext.current
+        var shouldShowCapitals by remember { mutableStateOf(false) } // Estado para controlar si se muestran las capitales
+
         Scaffold(
             topBar = {
                 TopAppBar(
@@ -63,7 +67,7 @@ class CreateCapitalActivity : ComponentActivity() {
                         val result = repository.insertCapital(capital)
                         if (result != -1L) {
                             Toast.makeText(this@CreateCapitalActivity, "Ciudad registrada exitosamente", Toast.LENGTH_SHORT).show()
-                            finish() // Close the activity and return to the previous screen
+                            shouldShowCapitals = true // Activar el estado para mostrar las capitales
                         } else {
                             Toast.makeText(this@CreateCapitalActivity, "Error al registrar ciudad", Toast.LENGTH_SHORT).show()
                         }
@@ -72,6 +76,11 @@ class CreateCapitalActivity : ComponentActivity() {
                     }
                 }
             )
+
+            // Mostrar todas las capitales registradas si el estado es verdadero
+            if (shouldShowCapitals) {
+                ShowAllCapitals()
+            }
         }
     }
 
@@ -114,6 +123,39 @@ class CreateCapitalActivity : ComponentActivity() {
                 onRegisterClick(nombrePais, nombreCapital, habitantesPromedio)
             }) {
                 Text("Registrar")
+            }
+
+            // Aquí se mostrará la lista de capitales registrada
+            ShowAllCapitals()
+        }
+    }
+
+    // Nueva función para mostrar todas las capitales guardadas
+    @Composable
+    fun ShowAllCapitals() {
+        // Obtener todas las ciudades guardadas
+        val capitalsList by remember { mutableStateOf(repository.getAllCapitals()) }
+
+        LazyColumn(modifier = Modifier.fillMaxSize().padding(16.dp)) {
+            if (capitalsList.isNotEmpty()) {
+                items(capitalsList) { capital ->
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(text = "País: ${capital.nombrePais}")
+                            Text(text = "Capital: ${capital.nombreCapital}")
+                            Text(text = "Habitantes: ${capital.habitantesPromedio}")
+                        }
+                    }
+                }
+            } else {
+                item {
+                    Text("No hay ciudades registradas")
+                }
             }
         }
     }
