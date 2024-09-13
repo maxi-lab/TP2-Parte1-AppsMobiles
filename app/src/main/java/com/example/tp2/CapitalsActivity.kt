@@ -19,15 +19,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
-import com.example.tp2.data.CapitalRepository
 import com.example.tp2.ui.theme.TP2Theme
 
 class CapitalsActivity : ComponentActivity() {
-    private lateinit var repository: CapitalRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = CapitalRepository(this)
         enableEdgeToEdge()
         setContent {
             TP2Theme {
@@ -47,7 +43,9 @@ fun CapitalsScreen() {
                 title = { Text("Capitales de Países") },
                 navigationIcon = {
                     IconButton(onClick = {
-                        context.startActivity(Intent(context, MainActivity::class.java))
+                        // Volver a MainActivity
+                        val intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
                     }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -66,59 +64,21 @@ fun CapitalsScreen() {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            item {
-                MenuCard(
-                    title = "Cargar una ciudad capital",
-                    description = "Permite al usuario cargar una ciudad capital",
-                    onButtonClick = {
-                        context.startActivity(Intent(context, CreateCapitalActivity::class.java))
-                    }
-                )
-            }
+            item { MenuCard("Cargar una ciudad capital", "Permite al usuario cargar una ciudad capital") {
+                val intent = Intent(context, CreateCapitalActivity::class.java)
+                context.startActivity(intent)
+            } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item {
-                MenuCard(
-                    title = "Consultar una ciudad por su nombre",
-                    description = "Permite al usuario buscar una ciudad por su nombre",
-                    onButtonClick = {
-                        // Aquí pones la acción para consultar una ciudad por su nombre
-                        // context.startActivity(Intent(context, ConsultaCiudadActivity::class.java))
-                    }
-                )
-            }
+            item { MenuCard("Consultar una ciudad por su nombre", "Permite al usuario buscar una ciudad por su nombre") {
+                val intent = Intent(context, GetCapitalByNameActivity::class.java)
+                context.startActivity(intent)
+            } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item {
-                MenuCard(
-                    title = "Borrar una ciudad ingresando su nombre",
-                    description = "Permite al usuario borrar una ciudad ingresando su nombre",
-                    onButtonClick = {
-                        // Aquí pones la acción para borrar una ciudad ingresando su nombre
-                        // context.startActivity(Intent(context, BorrarCiudadActivity::class.java))
-                    }
-                )
-            }
+            item { MenuCard("Borrar una ciudad ingresando su nombre", "Permite al usuario borrar una ciudad ingresando su nombre") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item {
-                MenuCard(
-                    title = "Borrar todas las ciudades",
-                    description = "Permite al usuario borrar todas las ciudades del listado",
-                    onButtonClick = {
-                        // Aquí pones la acción para borrar todas las ciudades
-                        // context.startActivity(Intent(context, BorrarTodasCiudadesActivity::class.java))
-                    }
-                )
-            }
+            item { MenuCard("Borrar todas las ciudades", "Permite al usuario borrar todas las ciudades del listado") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item {
-                MenuCard(
-                    title = "Modificar la población de una ciudad",
-                    description = "Permite al usuario modificar la población de una ciudad",
-                    onButtonClick = {
-                        // Aquí pones la acción para modificar la población de una ciudad
-                        // context.startActivity(Intent(context, ModificarPoblacionActivity::class.java))
-                    }
-                )
-            }
+            item { MenuCard("Modificar la población de una ciudad", "Permite al usuario modificar la población de una ciudad") { /* Acción */ } }
         }
     }
 }
