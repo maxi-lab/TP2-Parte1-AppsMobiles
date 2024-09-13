@@ -4,28 +4,26 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.platform.LocalContext
-import com.example.tp2.ui.theme.TP2Theme
-import com.example.tp2.data.CapitalRepository
 import com.example.tp2.data.Capital
+import com.example.tp2.data.CapitalRepository
+import androidx.compose.ui.Alignment
+import com.example.tp2.ui.theme.TP2Theme
 
 class GetCapitalByNameActivity : ComponentActivity() {
-    private lateinit var repository: CapitalRepository
+    private val repository by lazy { CapitalRepository.getInstance(this) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = CapitalRepository(this)
-        enableEdgeToEdge()
         setContent {
             TP2Theme {
                 GetCapitalByNameScreen(repository)

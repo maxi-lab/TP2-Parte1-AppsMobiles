@@ -11,21 +11,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.Alignment
 import com.example.tp2.data.Capital
 import com.example.tp2.data.CapitalRepository
 import com.example.tp2.ui.theme.TP2Theme
 
 class CreateCapitalActivity : ComponentActivity() {
-    private lateinit var repository: CapitalRepository
+    private val repository by lazy { CapitalRepository.getInstance(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = CapitalRepository(this)
         setContent {
             TP2Theme {
                 CreateCapitalScreen()

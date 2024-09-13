@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.platform.LocalContext
 import com.example.tp2.ui.theme.TP2Theme
 
+
 class CapitalsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +44,6 @@ fun CapitalsScreen() {
                 title = { Text("Capitales de Países") },
                 navigationIcon = {
                     IconButton(onClick = {
-                        // Volver a MainActivity
                         val intent = Intent(context, MainActivity::class.java)
                         context.startActivity(intent)
                     }) {
