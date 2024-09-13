@@ -64,7 +64,10 @@ fun CapitalsScreen() {
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            item { MenuCard("Cargar una ciudad capital", "Permite al usuario cargar una ciudad capital") { /* Acción */ } }
+            item { MenuCard("Cargar una ciudad capital", "Permite al usuario cargar una ciudad capital") {
+                val intent = Intent(context, CreateCapitalActivity::class.java)
+                context.startActivity(intent)
+            } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
             item { MenuCard("Consultar una ciudad por su nombre", "Permite al usuario buscar una ciudad por su nombre") {
                 val intent = Intent(context, GetCapitalByNameActivity::class.java)
