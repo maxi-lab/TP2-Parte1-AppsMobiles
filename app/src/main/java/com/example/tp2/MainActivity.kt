@@ -40,11 +40,11 @@ fun MainScreen() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding) // Utiliza innerPadding aquí
+                .padding(innerPadding)
         ) {
             Spacer(modifier = Modifier.size(100.dp))
             Title(
-                "Trabajo Practico Nro 2",
+                "Trabajo Práctico Nro 2",
                 Modifier
                     .fillMaxWidth()
                     .wrapContentSize(align = Alignment.TopCenter)
@@ -58,13 +58,13 @@ fun MainScreen() {
             )
             Spacer(modifier = Modifier.size(100.dp))
             FilledButton(
-                string = "Un poco de geografía",
+                string = "Un poco de Geografía",
                 emoji = "\uD83C\uDFD9\uFE0F",
                 onClick = { context.startActivity(Intent(context, CapitalsActivity::class.java)) }
             )
             Spacer(modifier = Modifier.height(30.dp))
             FilledButton(
-                string = "Adivina el Numero",
+                string = "Adivina el Número",
                 emoji = "🎲",
                 onClick = { context.startActivity(Intent(context, GuessNumber::class.java)) }
             )
