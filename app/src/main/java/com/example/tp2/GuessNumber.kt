@@ -58,7 +58,7 @@ class GuessNumber : ComponentActivity() {
     @Composable
     fun ScoreGame (score: Int){
         Card() {
-            Text(text = score.toString(),
+            Text(text = "Puntaje: "+score.toString(),
                 fontSize = 30.sp,
                 modifier = Modifier.padding(8.dp))
         }
@@ -66,7 +66,7 @@ class GuessNumber : ComponentActivity() {
     @Composable
     fun AttemptsGame(attempts:Int){
         Card {
-            Text(text = attempts.toString(),
+            Text(text = "Intentos: "+attempts.toString(),
                 fontSize = 30.sp,
                 modifier = Modifier.padding((8.dp))
                 )
@@ -75,7 +75,7 @@ class GuessNumber : ComponentActivity() {
     @Composable
     fun BestScore(bestScore:Int){
         Card {
-            Text(text = bestScore.toString(),
+            Text(text = "Mejor puntaje: "+bestScore.toString(),
                 fontSize = 30.sp,
                 modifier = Modifier.padding((8.dp))
             )
