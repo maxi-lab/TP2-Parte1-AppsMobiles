@@ -74,7 +74,11 @@ fun CapitalsScreen() {
                 context.startActivity(intent)
             } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item { MenuCard("Borrar una ciudad ingresando su nombre", "Permite al usuario borrar una ciudad ingresando su nombre") { /* Acción */ } }
+            item { MenuCard("Borrar una ciudad ingresando su nombre", "Permite al usuario borrar una ciudad ingresando su nombre") {
+                val intent = Intent(context, DeleteByName::class.java)
+                context.startActivity(intent)
+            } }
+
             item { Spacer(modifier = Modifier.height(10.dp)) }
             item { MenuCard("Borrar todas las ciudades", "Permite al usuario borrar todas las ciudades del listado") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
