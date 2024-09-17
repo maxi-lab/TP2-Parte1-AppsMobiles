@@ -13,6 +13,17 @@
         android:theme="@style/Theme.TP2"
         tools:targetApi="31">
         <activity
+            android:name=".ChangePopulation"
+            android:exported="false"
+            android:label="@string/title_activity_change_population"
+            android:theme="@style/Theme.TP2" />
+        <activity
+            android:name=".DeleteByName"
+            android:exported="false"
+            android:label="DeleteByName"
+            android:parentActivityName=".CapitalsActivity"
+            android:theme="@style/Theme.TP2" />
+        <activity
             android:name=".CreateCapitalActivity"
             android:exported="false"
             android:label="@string/title_activity_create_capital"
@@ -21,8 +32,8 @@
             android:name=".GetCapitalByNameActivity"
             android:exported="false"
             android:label="@string/title_activity_get_capital_by_name"
-            android:theme="@style/Theme.TP2"
-            android:parentActivityName=".CapitalsActivity"/>
+            android:parentActivityName=".CapitalsActivity"
+            android:theme="@style/Theme.TP2" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -45,7 +56,7 @@
             android:exported="true"
             android:label="GuessNumber"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.TP2"/>
+            android:theme="@style/Theme.TP2" />
     </application>
 
 </manifest>
