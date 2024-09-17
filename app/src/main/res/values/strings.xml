@@ -3,4 +3,5 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_create_capital">CreateCapitalActivity</string>
     <string name="title_activity_get_capital_by_name">GetCapitalByNameActivity</string>
+    <string name="title_activity_change_population">ChangePopulation</string>
 </resources>

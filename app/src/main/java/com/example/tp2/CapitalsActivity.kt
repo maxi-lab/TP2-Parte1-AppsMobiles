@@ -82,7 +82,10 @@ fun CapitalsScreen() {
             item { Spacer(modifier = Modifier.height(10.dp)) }
             item { MenuCard("Borrar todas las ciudades", "Permite al usuario borrar todas las ciudades del listado") { /* Acción */ } }
             item { Spacer(modifier = Modifier.height(10.dp)) }
-            item { MenuCard("Modificar la población de una ciudad", "Permite al usuario modificar la población de una ciudad") { /* Acción */ } }
+            item { MenuCard("Modificar la población de una ciudad", "Permite al usuario modificar la población de una ciudad") {
+                val intent = Intent(context, ChangePopulation::class.java)
+                context.startActivity(intent)
+            } }
         }
     }
 }
