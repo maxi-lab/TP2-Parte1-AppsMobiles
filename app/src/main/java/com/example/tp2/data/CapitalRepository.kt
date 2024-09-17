@@ -96,6 +96,8 @@ class CapitalRepository private constructor(context: Context) {
         return null
     }
 
-
+    fun deleteAllCapitals(): Boolean {
+        return database.delete("capitales", null, null) > 0
+    }
 
 }
